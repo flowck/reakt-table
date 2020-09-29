@@ -11,7 +11,8 @@ Table component written in Reactjs
 
 ## Props
 
-| Prop    | Description                                                                                   | Type          |
-| ------- | --------------------------------------------------------------------------------------------- | ------------- |
-| columns | Receives an array of strings                                                                  | array         |
-| rows    | Receives an array of objects with properties matching one of the items defined in the columns | array<object> |
+| Prop       | Description                                                                                   | Type          | Default |
+| ---------- | --------------------------------------------------------------------------------------------- | ------------- | ------- |
+| columns    | Receives an array of strings                                                                  | array         | []      |
+| rows       | Receives an array of objects with properties matching one of the items defined in the columns | array<object> | []      |
+| isSortable | Receives a boolean value to control the ability to sort columns                               | boolean       | false   |
