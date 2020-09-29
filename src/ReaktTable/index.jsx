@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 const ASC = "ASC";
 const DESC = "DESC";
 
@@ -15,6 +16,10 @@ const RctTableColumns = ({ columns, onSort = () => null }) => {
 };
 
 const sortColumn = (column, data, direction = "ASC") => {
+  if (!data[0][column]) {
+    return data;
+  }
+
   return [...data].sort((itemA, itemB) => {
     const a = itemA[column].toUpperCase();
     const b = itemB[column].toUpperCase();
@@ -31,7 +36,7 @@ const sortColumn = (column, data, direction = "ASC") => {
   });
 };
 
-const RctTable = ({ columns, rows = [] }) => {
+const RctTable = ({ columns, rows = [], isSortable = false }) => {
   const [data, setData] = useState(rows);
   const [column, setColumn] = useState("");
   const [sortDirection, setSortDirection] = useState(ASC);
@@ -51,12 +56,12 @@ const RctTable = ({ columns, rows = [] }) => {
   };
 
   return (
-    <table border="1">
+    <table className="reakt-table">
       <thead>
         <RctTableColumns
-          onSort={_sortColumn}
+          onSort={isSortable ? _sortColumn : () => {}}
           columns={columns}
-        ></RctTableColumns>
+        />
       </thead>
 
       <tbody>
@@ -72,8 +77,8 @@ const RctTable = ({ columns, rows = [] }) => {
       <tfoot>
         <RctTableColumns
           columns={columns}
-          onSort={_sortColumn}
-        ></RctTableColumns>
+          onSort={isSortable ? _sortColumn : () => {}}
+        />
       </tfoot>
     </table>
   );
